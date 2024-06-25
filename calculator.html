@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>calculatore</title>
+        <style>
+            .par{
+                color: black;
+                font-size: 29px;
+                font-family: arial;
+                font-weight: bold;
+                margin-left: 200px;
+                color: white;
+                margin-bottom: 70px;
+            }
+            body{
+                background-color: black;
+            }
+            .buttons{
+                text-align: center;
+
+            }
+            .display{
+                font-size: 15px;
+                color: white;
+                font-size: 35px;
+                margin-left: 200px;
+
+            }
+            .num{
+                font-size: 25px;
+                border-radius: 50px;
+                color: black;
+                background-color: lightgray;
+                margin-right: 5px;
+                margin-bottom: 25px;
+                padding: 10px 15px;
+                
+            }
+            .num1{
+                font-size: 25px;
+                border-radius: 50px;
+                color:black;
+                background-color: lightgray;
+                margin-right: 5px;
+                margin-bottom: 35px;
+                padding: 10px 15px;
+            }
+            .oper{
+                font-size: 25px;
+                border-radius: 50px;
+                color: white;
+                background-color: orange;
+                margin-bottom: 35px;
+                margin-right: 5px;
+                padding: 10px 15px;
+            }
+            .clear{
+                font-size: 25px;
+                border: none;
+                border-radius: 50px;
+                color: white;
+                background-color: orange;
+                margin-bottom: 35px;
+                margin-right: 5px;
+                padding: 10px 15px;
+                
+            }
+            .braces{
+                font-size: 25px;
+                border: none;
+                border-radius: 50px;
+                color: white;
+                background-color: orange;
+                margin-bottom: 35px;
+                margin-right: 5px;
+                padding: 10px 15px;
+            }
+        </style>
+    </head>
+ 
+<!------------------------------------------------------->
+
+    <body>
+
+        <p class="par">
+            basic calculatore
+        </p>
+        <p class="js-display display"></p>
+
+        <div class="buttons">
+        <button onclick="
+            concat('9 ');
+        " class = "num1">9</button>
+        <button onclick="
+            concat('8 ')
+        " class="num">8</button>
+        <button onclick="
+            concat('7 ');
+        " class="num">7</button>
+        <button onclick="
+        concat('/ ')
+         " class="oper">/</button>
+         <button onclick="
+         concat('* '); 
+          " class="oper">*</button><br>
+        <button onclick="
+             concat('6 ');
+        " class="num1">6</button>
+        <button onclick="
+            concat('5 ');
+        " class="num">5</button>
+        <button onclick="
+            concat('4 ');
+        " class="num">4</button>
+        <button onclick="
+            concat('+ ')
+        " class="oper">+</button>
+        <button onclick="
+            concat('- ')
+        " class="oper">-</button><br>
+        <button onclick="
+            concat('3 ')
+        " class="num1">3</button>
+        <button onclick="
+            concat('2 ')
+        " class="num">2</button>
+        <button onclick="
+            concat('1 ')  
+        " class="num">1</button>
+        <button onclick="
+        concat('. ')
+         " class="num">.</button>
+        <button onclick="
+            equalto();
+        " class="oper">=</button><br>
+       <button onclick="
+            clearer();
+        " class="js-clear clear ">clear</button>
+        <button  onclick="
+            concat('(')
+        " class=" braces"> ( </button>
+        <button onclick="
+            concat(')')
+        " class = " braces">)</button>
+    </div>
+
+<!------------------------------------------------------------------------------------------------------------------->
+        <script>
+           
+            let calculatore = '';
+            let answer =''
+            function concat(a = '0'){
+                 calculatore += a;
+                 document.querySelector('.js-display').innerHTML = calculatore
+            }
+            function equalto(){
+                answer = eval(calculatore);
+                document.querySelector('.js-display').innerHTML =  answer;
+                calculatore = '';
+            }
+            function clearer(){
+                document.querySelector('.js-display').innerHTML = '';   
+            }
+
+        </script>
+    </body>
+</html>
+
+
