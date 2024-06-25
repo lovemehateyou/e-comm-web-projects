@@ -1,0 +1,44 @@
+body{
+  font-family: arial;  
+}
+.input{
+    font-size: 15px;
+    padding: 7px;
+}
+.date{
+    font-size: 15px;
+    padding: 6px; 
+    margin-left: 10px;
+}
+.add_button{
+    color: white;
+    background-color: green;
+    font-size: 15px;
+    padding: 10px 35px;
+    cursor: pointer;
+    border: none;
+    margin-left: 10px;
+    
+}
+.delete_button{
+    color: white;
+    background-color: darkred;
+    font-size: 15px;
+    padding: 10px 35px;
+    cursor: pointer;
+    border: none;
+    margin-left: 10px;
+   
+}
+.container1,.container2{
+    display: grid;
+    grid-template-columns:220px 145px 112px;
+    column-gap: 10px;
+    row-gap: 10px;
+    align-items: center;
+
+}
+.container1{
+    margin-bottom: 10px;
+    align-items: stretch;
+}
