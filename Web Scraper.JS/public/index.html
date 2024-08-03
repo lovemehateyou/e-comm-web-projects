@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="scraper.css">
+    <title>Anime News</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Anime News Network Scraper</h1>
+        <span>
+        <button id="scrapeButton">Fetch Latest News</button>
+        <button id="allNewsButton">Show News</button>
+        <select class="category">
+            <option value="anime">anime</option>
+            <option value="manga">manga</option>
+            <option value="live-action">live-action</option>
+        </select>
+    </span>
+    </div>
+    <div id="newsContainer"></div>
+    <script src="scraper.js"></script>
+</body>
+</html>

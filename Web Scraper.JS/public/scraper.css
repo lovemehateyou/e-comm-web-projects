@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, sans-serif;
+    background:url('Anime Wallpaper.jpg');
+    color: white;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+
+}
+
+.container {
+    text-align: center;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+h1 {
+    color: white;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+button {
+    background-color: white;
+    color: #0f0f0f;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: black;
+    color: white;
+}
+.category{
+    background-color: white;
+    color: #0f0f0f;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+.category:hover{
+    background-color: black;
+    color: white;
+}
+
+#newsContainer {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.article {
+    border: 2px solid white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.article h3 {
+    margin: 0;
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+}
+
+.article p {
+    margin: 5px 0;
+    color: black;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.article a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+.article a:hover{
+    color: wheat;   
+}
+
+.article a:hover {
+    text-decoration: underline;
+}
