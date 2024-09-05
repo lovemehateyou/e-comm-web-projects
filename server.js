@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware to parse incoming JSON requests and cookies
 const corsOptions = {
-    origin: 'http://127.0.0.1:5500', // Replace with your frontend origin
+    origin: 'https://e-comm-web-projects.vercel.app', // Replace with your frontend origin
     credentials: true, // Allow credentials (cookies, etc.)
 };
 
@@ -26,7 +26,7 @@ app.use(session({
     secret: 'fikertalazareva11821996',  // Replace with your secret key
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false, maxAge: 30 * 24 * 60 * 60 * 1000 }  // Set secure: true if using HTTPS
+    cookie: { secure: true, maxAge: 30 * 24 * 60 * 60 * 1000 }  // Set secure: true if using HTTPS
 }));
 let sess = {}
 
@@ -132,31 +132,42 @@ const isAuthenticated = (req, res, next) => {
 
 // POST endpoint to handle the Buy action
 app.post('/buy', isAuthenticated, (req, res) => {
-    const user =sess;
-    
-    const { name, price, size } = req.body; // Product info from request body
-
-    // Email content
-    const mailOptions = {
-        from: process.env.EMAIL_USER, //Business email
-        to: 'alazarzerubabel6@gmail.com', 
+    try {
+      const user = sess; // Ensure 'sess' is properly set and defined
+      const { name, price, size } = req.body; // Product info from request body
+  
+      // Ensure all required fields are present
+      if (!name || !price || !size) {
+        return res.status(400).json({ error: 'Missing product information' });
+      }
+  
+      // Email content
+      const mailOptions = {
+        from: process.env.EMAIL_USER, // Business email
+        to: 'alazarzerubabel6@gmail.com',
         subject: 'New Purchase',
         text: `User ${user.name} (${user.email}) has purchased ${size} of ${name} for a total of $${price}. 
-               Shipping Address: ${user.address}`
-    };
-
-    // Send the email
-    transporter.sendMail(mailOptions, (error, info) => {
+               Shipping Address: ${user.address}`,
+      };
+  
+      // Send the email
+      transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            console.error('Error sending email:', error);
-            return res.status(500).json({ error: 'Failed to send email' });
+          console.error('Error sending email:', error);
+          // Check the error response to ensure it sends JSON
+          return res.status(500).json({ error: 'Failed to send email' });
         } else {
-            console.log('Email sent:', info.response);
-            res.status(200).json({ message: 'Purchase successful, email sent' });
+          console.log('Email sent:', info.response);
+          res.status(200).json({ message: 'Purchase successful, email sent' });
         }
-    });
-});
-
+      });
+    } catch (err) {
+      // Handle any unexpected errors
+      console.error('Unexpected error:', err);
+      res.status(500).json({ error: 'An unexpected error occurred' });
+    }
+  });
+  
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
