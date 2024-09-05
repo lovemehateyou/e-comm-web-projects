@@ -133,10 +133,10 @@ const isAuthenticated = (req, res, next) => {
 // POST endpoint to handle the Buy action
 app.post('/buy', isAuthenticated, (req, res) => {
     try {
-      const user = sess; // Ensure 'sess' is properly set and defined
-      const { name, price, size } = req.body; // Product info from request body
+      const user = sess; 
+      const { name, price, size } = req.body; 
   
-      // Ensure all required fields are present
+      
       if (!name || !price || !size) {
         return res.status(400).json({ error: 'Missing product information' });
       }
@@ -149,7 +149,8 @@ app.post('/buy', isAuthenticated, (req, res) => {
         text: `User ${user.name} (${user.email}) has purchased ${size} of ${name} for a total of $${price}. 
                Shipping Address: ${user.address}`,
       };
-  
+
+      mailOptions = JSON.stringify(mailOptions)
       // Send the email
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
