@@ -2,7 +2,7 @@
 export async function saving_user(usering){
     try {
         // Send the data to the server
-        const response = await fetch('http://localhost:3000/signup', {
+        const response = await fetch('https://e-comm-web-projects.vercel.app/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

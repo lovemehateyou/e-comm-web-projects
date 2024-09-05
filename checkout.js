@@ -63,7 +63,7 @@ function cart_load() {
             }
           })
           try {
-            const response = await fetch('http://localhost:3000/buy', {
+            const response = await fetch('https://e-comm-web-projects.vercel.app/buy', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

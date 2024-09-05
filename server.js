@@ -138,7 +138,7 @@ app.post('/buy', isAuthenticated, (req, res) => {
 
     // Email content
     const mailOptions = {
-        from: process.env.EMAIL_USER, 
+        from: process.env.EMAIL_USER, //Business email
         to: 'alazarzerubabel6@gmail.com', 
         subject: 'New Purchase',
         text: `User ${user.name} (${user.email}) has purchased ${size} of ${name} for a total of $${price}. 
