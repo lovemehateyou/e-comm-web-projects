@@ -40,6 +40,9 @@ const saveUserToFile = (user) => {
     }
 };
 
+app.get('/',(req,res)=>{
+    res.send('Welcome to the server side')
+})
 
 // POST endpoint to handle user sign-up
 app.post('/signup', (req, res) => {
