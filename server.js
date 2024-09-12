@@ -21,14 +21,7 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-// Use express-session for session management
-app.use(session({
-    secret: 'fikertalazareva11821996',  // Replace with your secret key
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true, maxAge: 30 * 24 * 60 * 60 * 1000 }  // Set secure: true if using HTTPS
-}));
-let sess = {}
+
 
 // Helper function to save users to the JSON file
 const saveUserToFile = (user) => {
@@ -47,17 +40,6 @@ const saveUserToFile = (user) => {
     }
 };
 
-
-
-
-// Nodemailer transporter setup (configure with your email credentials)
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL_USER, // Use environment variables for security
-        pass: process.env.EMAIL_PASS // Use environment variables for security
-    }
-});
 
 // POST endpoint to handle user sign-up
 app.post('/signup', (req, res) => {
@@ -120,54 +102,7 @@ app.post('/login', (req, res) => {
     }
 });
 
-// Middleware to check if the user is authenticated
-const isAuthenticated = (req, res, next) => {
-    console.log(sess)
-    if (sess) {
-        next();
-    } else {
-        res.status(401).json({ error: 'Not authenticated' });
-    }
-};
 
-// POST endpoint to handle the Buy action
-app.post('/buy', isAuthenticated, (req, res) => {
-    try {
-      const user = sess; 
-      const { name, price, size } = req.body; 
-  
-      
-      if (!name || !price || !size) {
-        return res.status(400).json({ error: 'Missing product information' });
-      }
-  
-      // Email content
-      const mailOptions = {
-        from: process.env.EMAIL_USER, // Business email
-        to: 'alazarzerubabel6@gmail.com',
-        subject: 'New Purchase',
-        text: `User ${user.name} (${user.email}) has purchased ${size} of ${name} for a total of $${price}. 
-               Shipping Address: ${user.address}`,
-      };
-
-      mailOptions = JSON.stringify(mailOptions)
-      // Send the email
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          console.error('Error sending email:', error);
-          // Check the error response to ensure it sends JSON
-          return res.status(500).json({ error: 'Failed to send email' });
-        } else {
-          console.log('Email sent:', info.response);
-          res.status(200).json({ message: 'Purchase successful, email sent' });
-        }
-      });
-    } catch (err) {
-      // Handle any unexpected errors
-      console.error('Unexpected error:', err);
-      res.status(500).json({ error: 'An unexpected error occurred' });
-    }
-  });
   
 // Start the server
 app.listen(PORT, () => {

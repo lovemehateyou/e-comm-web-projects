@@ -1,5 +1,6 @@
 import { products } from "../scripts/product-class.js";
 import { cart, delete_from_cart,isMobileDevice } from "../scripts/cart.js";
+import {setid,setamount} from "../scripts/buy_form.js"
 
 function cart_load() {
     let cartHTML = '';
@@ -25,7 +26,9 @@ function cart_load() {
                         </div>
                         <div class="cart-buttons">
                             <button class="cart-buy" 
-                                data-item-id="${cart_item.id}">Buy</button>
+                                data-item-id="${cart_item.id}" data-item-amount ="${cart_item.quantity}">
+                                     Buy
+                                </button>
                             <button class="cart-remove" 
                                 data-item-id="${cart_item.id}">Remove</button>
                         </div>
@@ -55,35 +58,20 @@ function cart_load() {
 
     document.querySelectorAll('.cart-buy').forEach((buy_button)=>{
         buy_button.addEventListener('click', async () => {
-          products.forEach((item)=>{
-            if(item.id === buy_button.dataset.itemId){
-                 name = item.name
-                 price = (item.priceCents / 100).toFixed(2)
-                 size = 1  
-            }
-          })
-          try {
-            const response = await fetch('https://e-comm-web-projects.vercel.app/buy', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ name, price, size }),
-                credentials: 'include'
-            });
-    
-            const data = await response.json();
-            if (response.ok) {
-                alert(data.message);
-            } else {
-                alert(data.error);
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
+            const itemId = buy_button.dataset.itemId;
+            const Amount = buy_button.dataset.itemAmount;
+            console.log(itemId, Amount,)
+            const id = setid(itemId)
+            const amount = setamount(Amount)
+            if(id === 1 && amount ===1){
+                window.location.href = "buy_form.html"
+            } 
+
         })
     })
 }
 
 
 cart_load();
+
+
