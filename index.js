@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware to parse incoming JSON requests and cookies
 const corsOptions = {
-    origin: 'https://e-comm-web-projects.vercel.app', // Replace with your frontend origin
+    origin: '*', // Replace with your frontend origin
     credentials: true, // Allow credentials (cookies, etc.)
 };
 
