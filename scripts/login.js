@@ -21,7 +21,7 @@ document.querySelector('.js-log').addEventListener('click', async (event) => {
     const username = document.querySelector('.username').value;
     const password = document.querySelector('.password').value;
 
-    const response = await fetch('http://localhost:3000/login', {
+    const response = await fetch('https://e-comm-web-projects.vercel.app/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
