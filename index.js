@@ -47,17 +47,13 @@ app.get('/',(req,res)=>{
 
 // POST endpoint to handle user sign-up
 app.post('/signup', (req, res) => {
-    const { nameing, email, phone, address, username, password } = req.body;
+    const { username, password } = req.body;
 
-    if (!nameing || !email || !phone || !address || !username || !password) {
+    if (!username || !password) {
         return res.status(400).json({ error: 'All fields are required' });
     }
 
     const newUser = {
-        name: nameing,
-        email: email,
-        phone: phone,
-        address: address,
         username: username,
         password: password,
     };
