@@ -20,14 +20,19 @@
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" placeholder="Your Email" required>
 
-            <label for="subject">Subject:</label>
-            <input type="text" id="subject" name="subject" placeholder="Subject" required>
 
             <label for="message">Message:</label>
             <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
 
             <button type="submit">Send Message</button>
+            
         </form>
+
+        <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+        </script>
+
+        <script src="./scripts/contact.js"></script>
     </div>
 </body>
 </html>
