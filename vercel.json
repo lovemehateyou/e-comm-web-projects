@@ -5,7 +5,7 @@
   ],
   "routes": [
     { "src": "/(.*)", "dest": "/index.html" },
-    { "src": "/api/(.*)", "dest": "/api/index.js" }, 
+    { "src": "https://e-comm-web-projects.vercel.app/(.*)", "dest": "index.js" }, 
     { "src": "/styles/(.*)", "dest": "/styles/$1" },  
     { "src": "/scripts/(.*)", "dest": "/scripts/$1" }, 
     { "src": "/images/(.*)", "dest": "/images/$1" },  
