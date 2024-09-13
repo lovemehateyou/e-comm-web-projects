@@ -8,9 +8,11 @@
     { "src": "images/**/*", "use": "@vercel/static" }  
   ],
   "routes": [
+    { "src": "/(.*)", "dest": "/$1" },
+    { "src": "/images/(.*)", "dest": "/images/$1" },
+    {"src": "/image/(.*)", "dest": "/image/$1"},
     { "src": "/api/(.*)", "dest": "index.js" }, 
-    { "src": "/styles", "dest": "styles/**/*" },
-    { "src": "/scripts", "dest": "scripts/**/*" },
-    { "src": "/(.*)", "dest": "/$1" }  
+    { "src": "/styles", "dest": "styles/$1" },
+    { "src": "/scripts", "dest": "scripts/$1" } 
   ]
 }
