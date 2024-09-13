@@ -1,7 +1,7 @@
-import {products} from 'product-class.js'
-import {cart, saving_cart} from 'cart.js'
-import { setname } from 'result.js'
-import {saving_id} from 'view.js'
+import {products} from './product-class.js'
+import {cart, saving_cart} from './cart.js'
+import { setname } from './result.js'
+import {saving_id} from './view.js'
 
 function load(){
     let productsHTML = ''

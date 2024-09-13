@@ -1,5 +1,5 @@
-import { products } from "product-class.js"
-import {cart, saving_cart} from 'cart.js'
+import { products } from "./product-class.js"
+import {cart, saving_cart} from './cart.js'
 
 let result_name =  JSON.parse(localStorage.getItem('result_name')) || ''
 localStorage.removeItem('result_name')
