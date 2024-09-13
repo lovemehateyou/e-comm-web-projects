@@ -14,8 +14,9 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware to parse incoming JSON requests and cookies
 const corsOptions = {
-    origin: '*', // Replace with your frontend origin
-    credentials: true, // Allow credentials (cookies, etc.)
+    origin: ['https://main--habeshshops.netlify.app'], // Allow your Netlify frontend
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
+    credentials: true // Allow credentials (cookies, etc.)
 };
 
 app.use(cors(corsOptions));
