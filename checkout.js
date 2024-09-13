@@ -1,6 +1,6 @@
-import { products } from "../scripts/product-class.js";
-import { cart, delete_from_cart,isMobileDevice } from "../scripts/cart.js";
-import {setid,setamount} from "../scripts/buy_form.js"
+import { products } from "product-class.js";
+import { cart, delete_from_cart,isMobileDevice } from "cart.js";
+import {setid,setamount} from "buy_form.js"
 
 function cart_load() {
     let cartHTML = '';

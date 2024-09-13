@@ -1,12 +1,22 @@
-import {products} from '../scripts/product-class.js'
-import {cart, saving_cart} from '../scripts/cart.js'
-import { setname } from '../scripts/result.js'
-import {saving_id} from '../scripts/view.js'
+import { products } from "product-class.js"
+import {cart, saving_cart} from 'cart.js'
 
-function load(){
-    let productsHTML = ''
-    products.forEach((item)=>{
-        productsHTML += `
+let result_name =  JSON.parse(localStorage.getItem('result_name')) || ''
+localStorage.removeItem('result_name')
+
+export function setname(name) {
+    localStorage.setItem('result_name', JSON.stringify(name));
+    return 1;
+}
+
+
+
+let resultHTML = ''
+products.forEach((item)=>{
+    let prod = item.name.toLowerCase()
+    if(prod.includes(result_name.toLowerCase())){
+        
+        resultHTML +=`
             <div class="product-container">
             <div class="product-img">
                 <img src="${item.image}" alt="" class="product-image">
@@ -39,17 +49,18 @@ function load(){
                     <button class="add-to-cart" data-item-id ="${item.id}">
                     Add to cart
                     </button>
-
-                     <button class="view-product" data-item-id ="${item.id}">
-                        View Product
-                    </button>
                     
+                    <button class="view-product" data-item-id = "${item.id}">
+                    View
+                    </button>
                 </div>
         </div>
+        
         `
-    })
+    }
+})
 
-document.querySelector('.products-grid').innerHTML = productsHTML
+document.querySelector('.products-grid').innerHTML = resultHTML
 
 let bag = {
    id : 0,
@@ -69,48 +80,3 @@ document.querySelectorAll('.add-to-cart').forEach((button)=>{
     })
    
 })
-
-document.querySelectorAll('.view-product').forEach((button)=>{
-    button.addEventListener("click",()=>{
-        const itemId = button.dataset.itemId
-        console.log(itemId)
-        let ok = saving_id(itemId)
-        if(ok ===1){
-             window.location.href = "view.html"
-        }
-    })
-})
-}
-
-load()
-
-
-document.querySelector('.search-button').addEventListener('click',()=>{
-   let thename =  document.querySelector('.search-bar').value
-   console.log(thename)
-    let ok = setname(thename)
-    if(ok === 1){
-        window.location.href = "result.html";
-    }
-})
-
-const images_list = [
-    '../images/person-working-from-home',
-
-    '../images/father-and-child-spending-time-together-outdoors',
-
-    '../images/person-shopping-online',
-
-    '../images/person-browsing-products-in-a-store'
-    
-]
-
-let count = 0
-
-function backgroundImg(){
-   
-let member = document.querySelector(".mid-part")  
-member.style.backgroundImage = `url(${images_list[count]}.png`
-count = (count + 1) % images_list.length
-}
-setInterval(backgroundImg, 4000); 

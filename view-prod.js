@@ -1,6 +1,6 @@
-import { products } from "../scripts/product-class.js"
-import {cart, saving_cart} from '../scripts/cart.js'
-import {prodid} from '../scripts/view.js'
+import { products } from "product-class.js"
+import {cart, saving_cart} from '/cart.js'
+import {prodid} from 'view.js'
 
 let ViewHTML = ''
 products.forEach((item)=>{
