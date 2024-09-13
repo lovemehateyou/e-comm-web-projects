@@ -6,6 +6,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');  // Add express-session
 const nodemailer = require('nodemailer');
+const exp = require('constants');
 require('dotenv').config(); // For environment variables
 
 const app = express();
@@ -45,7 +46,7 @@ app.get('/',(req,res)=>{
 })
 
 // POST endpoint to handle user sign-up
-app.post('/api/signup', (req, res) => {
+app.post('/signup', (req, res) => {
     const { nameing, email, phone, address, username, password } = req.body;
 
     if (!nameing || !email || !phone || !address || !username || !password) {
@@ -71,7 +72,7 @@ app.post('/api/signup', (req, res) => {
 });
 
 // POST endpoint to handle user login
-app.post('/api/login', (req, res) => {
+app.post('/login', (req, res) => {
     const { username, password } = req.body;
 
     if (!username || !password) {
@@ -92,11 +93,6 @@ app.post('/api/login', (req, res) => {
         }
 
         // Store user info in the session
-        
-        req.session.user = user;
-        sess = req.session.user
-        
-
         
         res.status(200).json({ message: 'Login successful' });
     } catch (error) {

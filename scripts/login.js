@@ -18,11 +18,10 @@ togglePassword()
 
 document.querySelector('.js-log').addEventListener('click', async (event) => {
     
-
     const username = document.querySelector('.username').value;
     const password = document.querySelector('.password').value;
 
-    const response = await fetch('/api/login', {
+    const response = await fetch('http://localhost:3000/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
