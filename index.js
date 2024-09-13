@@ -45,7 +45,7 @@ app.get('/',(req,res)=>{
 })
 
 // POST endpoint to handle user sign-up
-app.post('/signup', (req, res) => {
+app.post('/api/signup', (req, res) => {
     const { nameing, email, phone, address, username, password } = req.body;
 
     if (!nameing || !email || !phone || !address || !username || !password) {
@@ -71,7 +71,7 @@ app.post('/signup', (req, res) => {
 });
 
 // POST endpoint to handle user login
-app.post('/login', (req, res) => {
+app.post('/api/login', (req, res) => {
     const { username, password } = req.body;
 
     if (!username || !password) {
