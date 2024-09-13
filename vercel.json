@@ -4,12 +4,12 @@
     { "src": "index.js", "use": "@vercel/node" }
   ],
   "routes": [
+    { "src": "/(.*)", "dest": "/index.html" },
     { "src": "/api/(.*)", "dest": "/api/index.js" }, 
     { "src": "/styles/(.*)", "dest": "/styles/$1" },  
     { "src": "/scripts/(.*)", "dest": "/scripts/$1" }, 
     { "src": "/images/(.*)", "dest": "/images/$1" },  
-    { "src": "/image/(.*)", "dest": "/image/$1" },  
-    { "src": "/(.*)", "dest": "/index.html" }
+    { "src": "/image/(.*)", "dest": "/image/$1" }  
 
   ]
 }
