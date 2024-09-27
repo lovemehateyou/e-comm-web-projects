@@ -4,83 +4,69 @@ const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const session = require('express-session');  // Add express-session
-const nodemailer = require('nodemailer');
-const exp = require('constants');
+const mongoose = require('mongoose');
 require('dotenv').config(); // For environment variables
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+
+
+// Define User Schema and Model
+const userSchema = new mongoose.Schema({
+    username: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+});
+
+const User = mongoose.model('User', userSchema);
+
+
 // Middleware to parse incoming JSON requests and cookies
 const corsOptions = {
-    origin: ['https://main--habeshshops.netlify.app'], // Allow your Netlify frontend
+    origin: ['https://main--habeshshops.netlify.app', 'http://localhost:5500','http://127.0.0.1:5500'],
+
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods 
     allowedHeaders: ['Content-Type', 'Authorization'],
 
-    credentials: true // Allow credentials (cookies, etc.)
 };
 
 app.use(cors(corsOptions));
-
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://main--habeshshops.netlify.app');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    next();
-});
+app.options('*', cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-
-
-// Helper function to save users to the JSON file
-const saveUserToFile = (user) => {
-    const filePath = path.join(__dirname, 'users.json');
-    try {
-        let users = [];
-        if (fs.existsSync(filePath)) {
-            const fileData = fs.readFileSync(filePath, 'utf8');
-            users = JSON.parse(fileData);
-        }
-        users.push(user);
-        fs.writeFileSync(filePath, JSON.stringify(users, null, 2));
-        console.log('User saved successfully:', user);
-    } catch (error) {
-        console.error('Error saving user to file:', error);
-    }
-};
 
 app.get('/',(req,res)=>{
     res.send('Welcome to the server side')
 })
 
 // POST endpoint to handle user sign-up
-app.post('/signup', (req, res) => {
+app.post('/signup', async (req, res) => {
     const { username, password } = req.body;
 
     if (!username || !password) {
         return res.status(400).json({ error: 'All fields are required' });
     }
 
-    const newUser = {
-        username: username,
-        password: password,
-    };
 
     try {
-        saveUserToFile(newUser);
+        const existingUser = await User.findOne({ username });
+        if (existingUser) {
+            return res.status(400).json({ error: 'Username already exists' });
+        }
+
+        const newUser = new User({ username, password });
+        await newUser.save();
         res.status(201).json({ message: 'User signed up successfully' });
-        alert("Log in please")
     } catch (error) {
+        console.error('Error signing up user:', error);
         res.status(500).json({ error: 'Failed to save user information' });
     }
 });
 
 // POST endpoint to handle user login
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
     if (!username || !password) {
@@ -88,20 +74,12 @@ app.post('/login', (req, res) => {
     }
 
     try {
-        const filePath = path.join(__dirname, 'users.json');
-        let users = [];
-        if (fs.existsSync(filePath)) {
-            const fileData = fs.readFileSync(filePath);
-            users = JSON.parse(fileData);
-        }
+        const user = await User.findOne({ username, password });
 
-        const user = users.find(u => u.username === username && u.password === password);
         if (!user) {
             return res.status(400).json({ error: 'Invalid username or password' });
         }
 
-        // Store user info in the session
-        
         res.status(200).json({ message: 'Login successful' });
     } catch (error) {
         console.error('Error during login:', error);
@@ -109,9 +87,13 @@ app.post('/login', (req, res) => {
     }
 });
 
-
   
-// Start the server
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+// MongoDB connection
+mongoose.connect("mongodb+srv://alazarzerubabel:n3TtFovvBSOvHfGM@habesha.34uir.mongodb.net/?retryWrites=true&w=majority&appName=Habesha")
+.then(() =>{
+    console.log('Connected to MongoDB Atlas')
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+    });
+})
+  .catch(err => console.error('Failed to connect to MongoDB:', err));
