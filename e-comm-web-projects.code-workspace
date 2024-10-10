@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../Desktop/MongoDB"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "e-comm-web-projects"
+	}
+}
