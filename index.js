@@ -23,16 +23,16 @@ const User = mongoose.model('User', userSchema);
 
 // Middleware to parse incoming JSON requests and cookies
 const corsOptions = {
-    origin: ['http://localhost:5500','http://127.0.0.1:5500','https://habeshshops.netlify.app','https://e-comm-web-projects.vercel.app'],
+    origin: "*",
 
     /* methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods 
     allowedHeaders: ['Content-Type', 'Authorization'], */
-    credentials: true,
+    // credentials: true,
     optionsSuccessStatus: 200
 };
 
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
+/* app.options('*', cors(corsOptions));
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', 'https://habeshshops.netlify.app');
@@ -40,7 +40,7 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     res.header('Access-Control-Allow-Credentials', 'true');
     next();
-});
+}); */
 
 
 app.use(bodyParser.json());
