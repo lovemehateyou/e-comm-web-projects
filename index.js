@@ -25,9 +25,10 @@ const User = mongoose.model('User', userSchema);
 const corsOptions = {
     origin: ['http://localhost:5500','http://127.0.0.1:5500','https://habeshshops.netlify.app','https://e-comm-web-projects.vercel.app'],
 
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods 
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
+    /* methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods 
+    allowedHeaders: ['Content-Type', 'Authorization'], */
+    credentials: true,
+    optionsSuccessStatus: 200
 };
 
 app.use(cors(corsOptions));
