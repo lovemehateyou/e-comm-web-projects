@@ -6,6 +6,8 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 require('dotenv').config(); // For environment variables
+const helmet = require("helmet");
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,7 +22,7 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-
+app.use(helmet());
 // Middleware to parse incoming JSON requests and cookies
 const corsOptions = {
     origin: "*",
